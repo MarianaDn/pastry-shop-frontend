@@ -1,4 +1,11 @@
 import { createTheme } from '@mui/material/styles';
+import CormorantInfantBold from 'src/assets/fonts/CormorantInfantBold.ttf';
+import CormorantInfantSemiBold from 'src/assets/fonts/CormorantInfantSemiBold.ttf';
+import CormorantInfantMedium from 'src/assets/fonts/CormorantInfantMedium.ttf';
+import CormorantInfantRegular from 'src/assets/fonts/CormorantInfantRegular.ttf';
+import CormorantInfantLight from 'src/assets/fonts/CormorantInfantLight.ttf';
+import MarckScriptRegular from 'src/assets/fonts/MarckScriptRegular.ttf';
+
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -40,7 +47,7 @@ const createFont = (fontName: string, fontWeight: number, fontUrl: string) => `
 }`;
 
 const defaultButtonStyles: any = {
-  fontFamily: 'FuturaPTBook',
+  fontFamily: 'MarckScript',
   textTransform: 'none',
   borderRadius: 0,
   boxShadow: 'none',
@@ -81,16 +88,18 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['FuturaPTBook', 'FuturaPTMedium', 'FuturaPTDemi', 'FuturaPTBold'].join(','),
+    fontFamily: ['CormorantInfantBold', 'CormorantInfantSemiBold', 'CormorantInfantMedium', 'CormorantInfantRegular', 'CormorantInfantLight', 'MarckScript'].join(','),
   },
   components: {
     MuiCssBaseline: {
-      // styleOverrides: `
-      // ${createFont('FuturaPTBook', 400, FuturaPTBook)}
-      // ${createFont('FuturaPTMedium', 500, FuturaPTMedium)}
-      // ${createFont('FuturaPTDemi', 600, FuturaPTDemi)}
-      // ${createFont('FuturaPTBold', 700, FuturaPTBold)}
-      // `,
+      styleOverrides: `
+      ${createFont('CormorantInfantBold', 700, CormorantInfantBold)}
+      ${createFont('CormorantInfantSemiBold', 600, CormorantInfantSemiBold)}
+      ${createFont('CormorantInfantMedium', 500, CormorantInfantMedium)}
+      ${createFont('CormorantInfantRegular', 400, CormorantInfantRegular)}
+      ${createFont('CormorantInfantLight', 300, CormorantInfantLight)}
+      ${createFont('MarckScript', 400, MarckScriptRegular)}
+      `,
     },
   },
   breakpoints: {
