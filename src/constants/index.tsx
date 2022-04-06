@@ -172,3 +172,9 @@ export const aboutContent: aboutItem[] = [
   pastries and desserts every day with a cup of fragrant coffee.`,
   },
 ];
+
+export const deliveryCost: Array<string> = [
+  "Within the green zone - UAH 50 (from UAH 500 free of charge)",
+  "Within the yellow zone - UAH 80 (from UAH 500 free of charge)",
+  "Within the blue zone - UAH 100 (from UAH 700 free of charge)",
+];
