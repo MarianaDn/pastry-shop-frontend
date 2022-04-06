@@ -10,3 +10,4 @@ export { ReactComponent as Basket } from './bag.svg';
 export { ReactComponent as User } from './user.svg';
 export { ReactComponent as Wishlist } from './heart.svg';
 export { ReactComponent as CloseBtn } from './close.svg';
+export { ReactComponent as Hamburger } from './hamburger.svg';

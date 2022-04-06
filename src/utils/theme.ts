@@ -13,7 +13,7 @@ declare module '@mui/material/styles' {
     white: Palette['primary'];
     blue: Palette['primary'];
     green: Palette['primary'];
-    purple: Palette['primary'];
+    pink: Palette['primary'];
     red: Palette['primary'];
   }
 
@@ -22,7 +22,7 @@ declare module '@mui/material/styles' {
     white: PaletteOptions['primary'];
     blue: PaletteOptions['primary'];
     green: PaletteOptions['primary'];
-    purple: PaletteOptions['primary'];
+    pink: PaletteOptions['primary'];
     red: PaletteOptions['primary'];
   }
 
@@ -46,13 +46,6 @@ const createFont = (fontName: string, fontWeight: number, fontUrl: string) => `
     unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
 }`;
 
-const defaultButtonStyles: any = {
-  fontFamily: 'MarckScript',
-  textTransform: 'none',
-  borderRadius: 0,
-  boxShadow: 'none',
-};
-
 export const theme = createTheme({
   palette: {
     primary: {
@@ -71,8 +64,8 @@ export const theme = createTheme({
       dark: '#6fcf97',
       light: '#c5ecd6',
     },
-    purple: {
-      main: '#9B51E0',
+    pink: {
+      main: '#F9D6DC',
     },
     black: {
       main: '#000000',
@@ -83,8 +76,8 @@ export const theme = createTheme({
     },
     red: {
       main: '#d92530',
-      dark: '#8e0343',
-      light: '#E81152',
+      dark: '#7B242B',
+      light: '#99242B',
     },
   },
   typography: {

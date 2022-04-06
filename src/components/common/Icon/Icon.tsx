@@ -13,6 +13,7 @@ import {
   User,
   Wishlist,
   CloseBtn,
+  Hamburger,
 } from "src/assets/images/icons";
 
 export enum IconType {
@@ -28,6 +29,7 @@ export enum IconType {
   Truck = "Truck",
   Privacy = "Privacy",
   Quality = "Quality",
+  Hamburger = "Hamburger",
 }
 
 interface IconProps extends Omit<SvgIconProps, "color"> {
@@ -39,16 +41,17 @@ export const Icon: FC<IconProps> = ({ icon, color, ...rest }) => {
   const { [icon]: Icon } = {
     [IconType.Basket]: Basket,
     [IconType.Wishlist]: Wishlist,
+    [IconType.CloseBtn]: CloseBtn,
     [IconType.Facebook]: Facebook,
     [IconType.Instagram]: Instagram,
     [IconType.Viber]: Viber,
     [IconType.Telegram]: Telegram,
     [IconType.YouTube]: YouTube,
+    [IconType.User]: User,
     [IconType.Truck]: Truck,
     [IconType.Privacy]: Privacy,
     [IconType.Quality]: Quality,
-    [IconType.CloseBtn]: CloseBtn,
-    [IconType.User]: User,
+    [IconType.Hamburger]: Hamburger,
   } as Record<IconType, React.ElementType>;
 
   return (

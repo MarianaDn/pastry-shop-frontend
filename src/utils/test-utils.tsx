@@ -1,43 +1,42 @@
-import { ReactElement, ReactNode } from "react";
-import { ThemeProvider } from "@emotion/react";
+import { ReactNode, ReactElement } from "react";
+import { Provider } from "react-redux";
+import { createStore, Store } from "redux";
+import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { render, RenderOptions } from "@testing-library/react";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { createStore, Store } from "redux";
 import { rootReducer, RootState } from "src/redux/store";
-import { theme } from './theme';
+import { theme } from "./theme";
 
 const getWrapper = (
   children: ReactNode,
   {
-		initialState,
-		store = createStore(rootReducer, initialState, undefined),
+    initialState,
+    store = createStore(rootReducer, initialState, undefined),
   }: {
-		initialState?: Partial<RootState>;
-		store?: Store<Partial<RootState>>;
-	} = {},
+    initialState?: Partial<RootState>;
+    store?: Store<Partial<RootState>>;
+  } = {}
 ) => (
-	<Provider store={store}>
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<BrowserRouter>{children}</BrowserRouter>
-		</ThemeProvider>
-	</Provider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>{children}</BrowserRouter>
+    </ThemeProvider>
+  </Provider>
 );
 
 export const renderWithTheme = (
-	ui: ReactElement,
-	initialState?: {
-		initialState?: Partial<RootState>;
-		store?: Store<Partial<RootState>>;
-	},
-	options?: Omit<RenderOptions, 'queries'>,
+  ui: ReactElement,
+  initialState?: {
+    initialState?: Partial<RootState>;
+    store?: Store<Partial<RootState>>;
+  },
+  options?: Omit<RenderOptions, "queries">
 ) => {
-	const rendered = render(getWrapper(ui, initialState), options);
-	
-	return {
-		...rendered,
-		rerender: (ui: ReactElement) => rendered.rerender(getWrapper(ui)),
-	}
-}
+  const rendered = render(getWrapper(ui, initialState), options);
+  return {
+    ...rendered,
+    rerender: (ui: ReactElement) => rendered.rerender(getWrapper(ui)),
+  };
+};
