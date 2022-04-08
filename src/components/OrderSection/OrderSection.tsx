@@ -6,15 +6,15 @@ import {
   ListItem,
   styled,
   Typography,
+  Button,
 } from "@mui/material";
 import { deliveryCost } from "src/constants";
-import { Button } from "../common/Button/Button";
 import Background from "src/assets/images/goods_bg.png";
 
 const PREFIX = "OrderSection";
 
 const StyledSection = styled(Grid, {
-  name: `${PREFIX}-StyledButton`,
+  name: `${PREFIX}-StyledSection`,
 })(({ theme }) => ({
   background: `url(${Background}) center no-repeat`,
   backgroundSize: "cover",
@@ -104,6 +104,33 @@ const StyledListItem = styled(ListItem, {
   },
 }));
 
+const StyledButton = styled(Button, {
+  name: `${PREFIX}-StyledButton`,
+})(({ theme }) => ({
+  padding: theme.spacing(2.5, 8.5),
+  backgroundColor: theme.palette.red.dark,
+
+  "&:not(:last-child)": {
+    marginRight: theme.spacing(7),
+
+    [theme.breakpoints.down(1255)]: {
+      marginBottom: theme.spacing(3),
+    },
+
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 0,
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: theme.spacing(3),
+    },
+  },
+
+  "&:hover": {
+    backgroundColor: theme.palette.red.light,
+  },
+}));
+
 export const OrderSection = () => (
   <StyledSection container>
     <StyledFirstBlock item>
@@ -114,8 +141,10 @@ export const OrderSection = () => (
         visit our establishments or order with home delivery
       </StyledText>
       <Box>
-        <Button text="Order" />
-        <Button text="Compose yourself" />
+        <StyledButton variant="contained" href="#productSection">
+          Order
+        </StyledButton>
+        <StyledButton variant="contained">Compose yourself</StyledButton>
       </Box>
     </StyledFirstBlock>
     <StyledBlock item>

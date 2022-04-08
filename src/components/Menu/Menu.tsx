@@ -1,5 +1,4 @@
 import {
-  Link,
   List,
   ListItem,
   ListItemButton,
@@ -8,6 +7,8 @@ import {
   typographyClasses,
 } from "@mui/material";
 import { headerData } from "src/constants";
+import { ROUTES } from "src/constants/routes";
+import { useNavigate } from "react-router-dom";
 
 const PREFIX = "Menu";
 
@@ -23,27 +24,23 @@ const StyledList = styled(List, {
   },
 });
 
-const StyledLink = styled(Link, {
-  name: `${PREFIX}-StyledLink`,
-})(({ theme }) => ({
-  textDecoration: "none",
-  color: theme.palette.black.main,
+export const Menu = () => {
+  const navigate = useNavigate();
 
-  "&:hover": {
-    cursor: "pointer",
-  },
-}));
-
-export const Menu = () => (
-  <StyledList>
-    {headerData.nav.map(({ id, name, path }) => (
-      <ListItem disablePadding key={id} sx={{ px: 1, width: "auto" }}>
-        <ListItemButton>
-          <StyledLink href={path}>
+  return (
+    <StyledList>
+      {headerData.nav.map(({ id, name, category }) => (
+        <ListItem disablePadding key={id} sx={{ px: 1, width: "auto" }}>
+          <ListItemButton
+            onClick={() => {
+              navigate(`${ROUTES.HOME}${category}`);
+              window.scrollTo(0, 0);
+            }}
+          >
             <ListItemText primary={name} />
-          </StyledLink>
-        </ListItemButton>
-      </ListItem>
-    ))}
-  </StyledList>
-);
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </StyledList>
+  );
+};

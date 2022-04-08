@@ -1,5 +1,4 @@
 import { IconType } from "src/components/common/Icon/Icon";
-import { ROUTES } from "./routes";
 import Visa from "src/assets/images/visa.png";
 import MasterCard from "src/assets/images/mastercard.png";
 import GooglePay from "src/assets/images/googlePay.png";
@@ -19,7 +18,7 @@ interface headerDataProps {
 interface navType {
   id: number;
   name: string;
-  path: string;
+  category: string;
 }
 
 interface iconsType {
@@ -29,11 +28,11 @@ interface iconsType {
 
 export const headerData: headerDataProps = {
   nav: [
-    { id: 1, name: "Macarons", path: ROUTES.MACARONS },
-    { id: 2, name: "Desserts", path: ROUTES.DESSERTS },
-    { id: 3, name: "Croissants", path: ROUTES.CROISSANTS },
-    { id: 4, name: "Cookies", path: ROUTES.COOKIES },
-    { id: 5, name: "Eclairs", path: ROUTES.ECLAIRS },
+    { id: 1, name: "Macarons", category: "macarun" },
+    { id: 2, name: "Desserts", category: "desserts" },
+    { id: 3, name: "Croissants", category: "croissants" },
+    { id: 4, name: "Cookies", category: "cookies" },
+    { id: 5, name: "Eclairs", category: "eclair" },
   ],
   icons: [
     { id: 1, icon: IconType.User },
@@ -117,34 +116,34 @@ export const socialMedia: socialMediaProp[] = [
 interface ProductsData {
   id: number;
   image: string;
-  link: string;
+  category: string;
 }
 
 export const productData: ProductsData[] = [
   {
     id: 1,
     image: Cake,
-    link: ROUTES.DESSERTS,
+    category: "cake",
   },
   {
     id: 2,
     image: Croissant,
-    link: ROUTES.CROISSANTS,
+    category: "croissant",
   },
   {
     id: 3,
     image: Cookies,
-    link: ROUTES.COOKIES,
+    category: "cookies",
   },
   {
     id: 4,
     image: Macarun,
-    link: ROUTES.MACARONS,
+    category: "macarun",
   },
   {
     id: 5,
     image: Eclair,
-    link: ROUTES.ECLAIRS,
+    category: "eclair",
   },
 ];
 

@@ -15,9 +15,14 @@ const StyledGrid = styled(Grid, {
 });
 
 export const ProductsSection = () => (
-  <StyledGrid container justifyContent="space-evenly" sx={{ py: 10, px: 3 }}>
-    {productData.map(({ id, image, link }) => (
-      <ProductItem key={id} image={image} link={link} />
+  <StyledGrid
+    container
+    justifyContent="space-evenly"
+    sx={{ py: 10, px: 3 }}
+    id="productSection"
+  >
+    {productData.map(({ id, image, category }) => (
+      <ProductItem key={id} image={image} category={category} />
     ))}
   </StyledGrid>
 );

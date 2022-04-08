@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ProductItem } from "./ProductItem";
 import Cake from "src/assets/images/cake.jpg";
-import { ROUTES } from "src/constants/routes";
 
 export default {
   title: "components/ProductItems",
@@ -16,5 +15,5 @@ export const productItem = Template.bind({});
 
 productItem.args = {
   image: Cake,
-  link: ROUTES.DESSERTS,
+  category: "cake",
 };

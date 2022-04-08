@@ -1,15 +1,17 @@
 import { FC } from "react";
-import { Link, styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "src/constants/routes";
 
 interface ProductItemProp {
   image: string;
-  link: string;
+  category: string;
 }
 
 const PREFIX = "ProductItem";
 
-const StyledLink = styled(Link, {
-  name: `${PREFIX}-StyledGrid`,
+const StyledProductItem = styled(Box, {
+  name: `${PREFIX}-StyledProductItem`,
 })(({ theme }) => ({
   border: `3px solid ${theme.palette.pink.main}`,
   borderRadius: "50%",
@@ -22,6 +24,7 @@ const StyledLink = styled(Link, {
 
   "&:hover": {
     transform: "scale(1.05)",
+    cursor: "pointer",
   },
 
   "&:not(:last-child)": {
@@ -29,12 +32,19 @@ const StyledLink = styled(Link, {
   },
 }));
 
-export const ProductItem: FC<ProductItemProp> = ({ image, link }) => (
-  <StyledLink
-    href={link}
-    sx={{
-      background: `url(${image}) center no-repeat`,
-      backgroundSize: "cover",
-    }}
-  />
-);
+export const ProductItem: FC<ProductItemProp> = ({ image, category }) => {
+  const navigate = useNavigate();
+
+  return (
+    <StyledProductItem
+      onClick={() => {
+        navigate(`${ROUTES.HOME}${category}`);
+        window.scrollTo(0, 0);
+      }}
+      sx={{
+        background: `url(${image}) center no-repeat`,
+        backgroundSize: "cover",
+      }}
+    />
+  );
+};

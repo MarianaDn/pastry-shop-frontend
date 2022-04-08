@@ -10,6 +10,8 @@ import { headerData } from "src/constants";
 import { Icon, IconType } from "src/components/common/Icon/Icon";
 import { Menu } from "src/components/Menu/Menu";
 import { isDesktop } from "react-device-detect";
+import { useState } from "react";
+import { ModalMenu } from "../ModalMenu/ModalMenu";
 
 const PREFIX = "Header";
 
@@ -53,27 +55,37 @@ const StyledList = styled(List, {
   },
 });
 
-export const Header = () => (
-  <StyledGrid container>
-    <Grid item>
-      {isDesktop ? (
-        <Menu />
-      ) : (
-        <ListItemButton>
-          <StyledIcon icon={IconType.Hamburger} viewBox="0 0 32 32" />
-        </ListItemButton>
-      )}
-    </Grid>
-    <Grid item>
-      <StyledList>
-        {headerData.icons.map(({ id, icon }) => (
-          <ListItem disablePadding key={id}>
-            <ListItemButton>
-              <StyledIcon icon={icon} viewBox="0 0 32 32" />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </StyledList>
-    </Grid>
-  </StyledGrid>
-);
+export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuClose = () => setIsMenuOpen(false);
+
+  return (
+    <StyledGrid container>
+      <Grid item>
+        {isDesktop ? (
+          <Menu />
+        ) : (
+          <ListItemButton onClick={() => setIsMenuOpen((x) => !x)}>
+            {isMenuOpen ? (
+              <StyledIcon icon={IconType.CloseBtn} viewBox="0 0 24 24" />
+            ) : (
+              <StyledIcon icon={IconType.Hamburger} viewBox="0 0 24 24" />
+            )}
+          </ListItemButton>
+        )}
+      </Grid>
+      <Grid item>
+        <StyledList>
+          {headerData.icons.map(({ id, icon }) => (
+            <ListItem disablePadding key={id}>
+              <ListItemButton>
+                <StyledIcon icon={icon} viewBox="0 0 32 32" />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </StyledList>
+      </Grid>
+      <ModalMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
+    </StyledGrid>
+  );
+};

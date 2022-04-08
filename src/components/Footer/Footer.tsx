@@ -64,7 +64,9 @@ export const Footer = () => (
         <SocialMedia />
       </Grid>
       <Grid item>
-        <img src={LogoGif} alt="logo_gif" width={200} />
+        <a href="/">
+          <img src={LogoGif} alt="logo_gif" width={200} />
+        </a>
       </Grid>
     </StyledFooterFirstWrapper>
     <StyledDivider />
