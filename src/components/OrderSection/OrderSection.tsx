@@ -160,7 +160,7 @@ export const OrderSection = () => (
           </StyledTitle>
           <List>
             {deliveryCost.map((item) => (
-              <StyledListItem>&bull; {item}</StyledListItem>
+              <StyledListItem key={item}>&bull; {item}</StyledListItem>
             ))}
           </List>
         </Box>

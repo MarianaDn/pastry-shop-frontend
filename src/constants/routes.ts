@@ -1,4 +1,6 @@
 export const ROUTES = {
     HOME: '/',
-    CATEGORY: '/:category'
+    CATEGORY: '/:category',
+    USERPAGE: '/user',
+    ADMINPAGE: '/admin'
 }

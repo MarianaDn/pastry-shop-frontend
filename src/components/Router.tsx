@@ -3,6 +3,7 @@ import { ROUTES } from "src/constants/routes";
 import { HomePage } from "src/pages/HomePage/HomePage";
 import { Page404 } from "src/pages/Page404/Page404";
 import { ProductsCatalog } from "src/pages/ProductsCatalog/ProductsCatalog";
+import { UserPage } from "src/pages/UserPage/UserPage";
 
 interface Page {
   component: JSX.Element;
@@ -20,6 +21,11 @@ const pages: Page[] = [
     component: <ProductsCatalog />,
     path: ROUTES.CATEGORY,
     pathName: "CategoryPage",
+  },
+  {
+    component: <UserPage />,
+    path: ROUTES.USERPAGE,
+    pathName: "UserPage",
   },
   {
     component: <Page404 />,

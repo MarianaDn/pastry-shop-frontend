@@ -6,12 +6,12 @@ import {
   styled,
   typographyClasses,
 } from "@mui/material";
-import { headerData } from "src/constants";
 import { Icon, IconType } from "src/components/common/Icon/Icon";
 import { Menu } from "src/components/Menu/Menu";
 import { isDesktop } from "react-device-detect";
 import { useState } from "react";
 import { ModalMenu } from "../ModalMenu/ModalMenu";
+import { AuthorizationModal } from "../AuthorizationModal/AuthorizationModal";
 
 const PREFIX = "Header";
 
@@ -57,7 +57,14 @@ const StyledList = styled(List, {
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isPopUpVariant, setIsPopUpVariant] = useState("authorization");
+  console.log(isPopUpOpen);
+
   const handleMenuClose = () => setIsMenuOpen(false);
+  const handlePopUpClose = () => setIsPopUpOpen(false);
+  const handlePopUpVariant = (variant: "authorization" | "registration") =>
+    setIsPopUpVariant(variant);
 
   return (
     <StyledGrid container>
@@ -76,16 +83,44 @@ export const Header = () => {
       </Grid>
       <Grid item>
         <StyledList>
-          {headerData.icons.map(({ id, icon }) => (
-            <ListItem disablePadding key={id}>
-              <ListItemButton>
-                <StyledIcon icon={icon} viewBox="0 0 32 32" />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => setIsPopUpOpen((x) => !x)}>
+              <StyledIcon icon={IconType.User} viewBox="0 0 32 32" />
+            </ListItemButton>
+            <ListItemButton>
+              <StyledIcon icon={IconType.Wishlist} viewBox="0 0 32 32" />
+            </ListItemButton>
+            <ListItemButton>
+              <StyledIcon icon={IconType.Basket} viewBox="0 0 32 32" />
+            </ListItemButton>
+          </ListItem>
         </StyledList>
       </Grid>
       <ModalMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
+      {console.log(isPopUpVariant)}
+      {isPopUpVariant === "authorization" ? (
+        <AuthorizationModal
+          isOpen={isPopUpOpen}
+          onClose={handlePopUpClose}
+          title="Authorization"
+          buttonText="Log in"
+          text="Not registered yet?"
+          link="Register"
+          variantForm="registration"
+          handleChangeVariant={handlePopUpVariant}
+        />
+      ) : (
+        <AuthorizationModal
+          isOpen={isPopUpOpen}
+          onClose={handlePopUpClose}
+          title="Registration"
+          buttonText="Sing up"
+          text="Do you have an account?"
+          link="Log in"
+          variantForm="authorization"
+          handleChangeVariant={handlePopUpVariant}
+        />
+      )}
     </StyledGrid>
   );
 };

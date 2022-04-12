@@ -30,6 +30,7 @@ export enum IconType {
   Privacy = "Privacy",
   Quality = "Quality",
   Hamburger = "Hamburger",
+  NoIcon = "NoIcon",
 }
 
 interface IconProps extends Omit<SvgIconProps, "color"> {
