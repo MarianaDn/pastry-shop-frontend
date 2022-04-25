@@ -7,6 +7,8 @@ import { Cart } from "../common/Card/Card";
 import { SummaryCard } from "../SummeryCard/SummaryCard";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "src/constants/routes";
 
 const PREFIX = "Tabs";
 
@@ -17,7 +19,7 @@ const StyledTabs = styled(Box, {
   justifyContent: "space-between",
 
   [theme.breakpoints.down("ipad")]: {
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
 }));
 
@@ -65,6 +67,7 @@ const StyledSummeryCardWrapper = styled(Box, {
 }));
 
 export const Tabs = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState("Shopping Bag");
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
@@ -77,14 +80,15 @@ export const Tabs = () => {
     <Box sx={{ width: "100%" }}>
       <TabContext value={value}>
         <StyledTabs>
-          <Button variant="outlined">CONTINUE SHOPPING</Button>
+          <Button variant="outlined" onClick={() => navigate(ROUTES.HOME)}>
+            CONTINUE SHOPPING
+          </Button>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <StyledTab label="Shopping Bag" value="Shopping Bag" />
               <StyledTab label="Your wishlist" value="Your wishlist" />
             </TabList>
           </Box>
-          <Button variant="contained">CHECKOUT NOW</Button>
         </StyledTabs>
         <StyledTabPanel value="Shopping Bag">
           <StyledProductCardWrapper>

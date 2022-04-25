@@ -1,9 +1,20 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Grid, Link, styled, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Link,
+  styled,
+  Typography,
+} from "@mui/material";
 import { ROUTES } from "src/constants/routes";
 import { Input } from "../common/Input/Input";
-import { REG_EX_NAME, REG_EX_SURNAME } from "src/constants";
+import { REG_EX_NAME, REG_EX_SURNAME, userRequest } from "src/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
+import { login } from "src/redux/apiCalls";
 
 const PREFIX = "RegistrationForm";
 
@@ -126,6 +137,7 @@ export const RegistrationForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+  const [registrationError, setRegistrationError] = useState(false);
 
   const [formValue, setFormValue] = useState<FormValueType>({
     name: "",
@@ -197,6 +209,24 @@ export const RegistrationForm = () => {
       isPasswordValid,
     });
   }, [isNameValid, isSurnameValid, isEmailValid, isPasswordValid]);
+
+  const createUser = async () => {
+    try {
+      const res = await userRequest.post("/auth/register", {
+        username: formValue.name,
+        email: formValue.email,
+        password: formValue.password,
+      });
+      navigate(ROUTES.AUTHORIZATION);
+    } catch {
+      setRegistrationError(true);
+    }
+  };
+
+  const handleClick = (e: FormEvent) => {
+    e.preventDefault();
+    createUser();
+  };
 
   return (
     <StyledRegistForm>
@@ -280,6 +310,11 @@ export const RegistrationForm = () => {
             PRIVACY POLICY
           </Link>
         </StyledText>
+        {registrationError && (
+          <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
+            Something went wrong...
+          </Alert>
+        )}
         <StyledButton
           disabled={
             isNameValid && isSurnameValid && isPasswordValid && isEmailValid
@@ -287,10 +322,7 @@ export const RegistrationForm = () => {
               : isDisabledButton
           }
           variant="outlined"
-          onClick={() => {
-            navigate(`${ROUTES.USERPAGE}`);
-            window.scrollTo(0, 0);
-          }}
+          onClick={handleClick}
         >
           CREATE
         </StyledButton>

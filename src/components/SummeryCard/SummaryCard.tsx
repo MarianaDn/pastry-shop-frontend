@@ -104,7 +104,7 @@ export const SummaryCard: FC<SummaryCardProp> = ({ total }) => {
           billingAddress
           shippingAddress
           description={`Your total is ${total} UAH`}
-          amount={total * 100}
+          amount={50000}
           token={onToken}
           stripeKey={KEY}
         >

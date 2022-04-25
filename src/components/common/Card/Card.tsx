@@ -85,14 +85,8 @@ export const Cart: FC<productItems> = ({
         <StyledDescription>{desc}</StyledDescription>
         <StyledTitle>{price * quantity} UAH</StyledTitle>
       </CardContent>
-      <CardActions>
-        <StyledButton size="small" onClick={() => handleQuantity("inc")}>
-          <AddIcon />
-        </StyledButton>
-        <StyledTitle sx={{ px: 1 }}>{quantityItems}</StyledTitle>
-        <StyledButton size="small" onClick={() => handleQuantity("dec")}>
-          <RemoveIcon />
-        </StyledButton>
+      <CardActions sx={{ width: 100, justifyContent: "center" }}>
+        <StyledTitle sx={{ px: 1 }}>{quantityItems} шт.</StyledTitle>
       </CardActions>
     </StyledCard>
   );
