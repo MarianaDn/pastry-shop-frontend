@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
+import { Authorization } from "src/pages/Authorization/Authorization";
 import { HomePage } from "src/pages/HomePage/HomePage";
 import { Page404 } from "src/pages/Page404/Page404";
 import { ProductsCatalog } from "src/pages/ProductsCatalog/ProductsCatalog";
+import { Registration } from "src/pages/Registration/Registration";
+import { ShoppingCard } from "src/pages/ShoppingCard/ShoppingCard";
+import { Success } from "src/pages/Success/Success";
 import { UserPage } from "src/pages/UserPage/UserPage";
 
 interface Page {
@@ -26,6 +30,26 @@ const pages: Page[] = [
     component: <UserPage />,
     path: ROUTES.USERPAGE,
     pathName: "UserPage",
+  },
+  {
+    component: <Authorization />,
+    path: ROUTES.AUTHORIZATION,
+    pathName: "Authorization",
+  },
+  {
+    component: <Registration />,
+    path: ROUTES.REGISTER,
+    pathName: "Registration",
+  },
+  {
+    component: <ShoppingCard />,
+    path: ROUTES.SHOPPINGCARD,
+    pathName: "ShoppingCard",
+  },
+  {
+    component: <Success />,
+    path: ROUTES.SUCCESS,
+    pathName: "Success",
   },
   {
     component: <Page404 />,

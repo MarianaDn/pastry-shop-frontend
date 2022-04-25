@@ -9,6 +9,7 @@ import Macarun from "src/assets/images/macarun.jpg";
 import Eclair from "src/assets/images/eclairs.png";
 import Croissants from "src/assets/images/about-image-1.png";
 import Cookie from "src/assets/images/about-image-2.png";
+import axios from "axios";
 
 interface headerDataProps {
   nav: Array<navType>;
@@ -32,7 +33,7 @@ export const headerData: headerDataProps = {
     { id: 2, name: "Desserts", category: "desserts" },
     { id: 3, name: "Croissants", category: "croissants" },
     { id: 4, name: "Cookies", category: "cookies" },
-    { id: 5, name: "Eclairs", category: "eclair" },
+    { id: 5, name: "Eclairs", category: "eclairs" },
   ],
   icons: [
     { id: 1, icon: IconType.User },
@@ -123,7 +124,7 @@ export const productData: ProductsData[] = [
   {
     id: 1,
     image: Cake,
-    category: "cake",
+    category: "desserts",
   },
   {
     id: 2,
@@ -143,7 +144,7 @@ export const productData: ProductsData[] = [
   {
     id: 5,
     image: Eclair,
-    category: "eclair",
+    category: "eclairs",
   },
 ];
 
@@ -177,3 +178,34 @@ export const deliveryCost: Array<string> = [
   "Within the yellow zone - UAH 80 (from UAH 500 free of charge)",
   "Within the blue zone - UAH 100 (from UAH 700 free of charge)",
 ];
+
+export const REG_EX_NAME = /^[a-zA-Z-]{3,40}$/;
+export const REG_EX_SURNAME = /^[a-zA-Z]{3,50}$/;
+export const REG_EX_M0BILE = /^[0-9]{9}$/;
+export const REG_EX_EMAIL = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+export const REG_EX_PASSWORD =
+  /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+export const BASE_URL = "http://localhost:3001/api/";
+export const TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjAyNTdjMGE2ZGQwMGE5ZDBhNGFiZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDQ2ODMxNywiZXhwIjoxNjUwNzI3NTE3fQ.irDYllJxTEhahd7scnjZ7FhYeAypaTgl6Rf_s2ebDZo";
+
+export const userRequest = axios.create({
+  baseURL: BASE_URL,
+  headers: { token: `Barer ${TOKEN}` },
+});
+
+export type FoodStuffItemType = {
+  img: string;
+  title: string;
+  desc: string;
+  price: number;
+};
+
+export interface productItems {
+  title: string;
+  desc: string;
+  img: string;
+  price: number;
+  quantity: number;
+}

@@ -6,12 +6,12 @@ import { theme } from "src/utils/theme";
 import { Router } from "./Router";
 
 const App = () => (
-  // <Provider store={store}>
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Router />
-  </ThemeProvider>
-  // </Provider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router />
+    </ThemeProvider>
+  </Provider>
 );
 
 export default App;

@@ -2,8 +2,9 @@ import { Button, Grid, styled, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { FoodStuffItem } from "../common/FoodStuffItem/FoodStuffItem";
 import Background from "src/assets/images/goods_bg.png";
-import Macarun from "src/assets/images/macarun-1.jpeg";
-import Eclair from "src/assets/images/eclair-1.jpeg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "src/constants";
 
 const PREFIX = "CategorySection";
 
@@ -55,57 +56,30 @@ const StyledButton = styled(Button, {
   },
 }));
 
-const items = [
-  {
-    image: Macarun,
-    title: "МАКАРОН ФІСТАШКА-МАЛИНА",
-    description: "Макаронс з начинкою із ніжного фісташкового ганашу та малини",
-    price: "40UAH",
-    productCategory: "macarun",
-  },
-  {
-    image: Eclair,
-    title: "ЕКЛЕР ФУНДУК",
-    description:
-      "Еклер з начинкою із ніжного вершкового крему з додаванням фундука",
-    price: "65UAH",
-    productCategory: "eclair",
-  },
-  {
-    image: Macarun,
-    title: "МАКАРОН КОКОС-АНАНАС",
-    description: "Макаронс з начинкою із ніжного кокосового ганашу та ананасу",
-    price: "40UAH",
-    productCategory: "macarun",
-  },
-  {
-    image: Macarun,
-    title: "МАКАРОН ФІСТАШКА-МАЛИНА",
-    description: "Макаронс з начинкою із ніжного фісташкового ганашу та малини",
-    price: "40UAH",
-    productCategory: "macarun",
-  },
-];
-
 export const CategorySection = () => {
   const location = useLocation();
   const category = location.pathname.slice(1);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const { data } = await axios.get(
+          `${BASE_URL}products?category=${category}`
+        );
+        setProducts(data);
+      } catch (err) {}
+    };
+    getProducts();
+  }, [category]);
 
   return (
     <StyledSection container>
       <StyledTitle variant="h2">{category}</StyledTitle>
       <StyledItems item>
-        {items.map(
-          ({ image, title, description, price, productCategory }) =>
-            category === productCategory && (
-              <FoodStuffItem
-                image={image}
-                title={title}
-                description={description}
-                price={price}
-              />
-            )
-        )}
+        {products.map((product, index) => (
+          <FoodStuffItem product={product} key={index} />
+        ))}
       </StyledItems>
       <StyledButton variant="contained">Compose yourself</StyledButton>
     </StyledSection>

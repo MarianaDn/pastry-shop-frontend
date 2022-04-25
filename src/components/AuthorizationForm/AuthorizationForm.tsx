@@ -1,63 +1,59 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-import { Box, Button, Grid, styled, Typography, Link } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Link,
+  styled,
+  Typography,
+} from "@mui/material";
 import { ROUTES } from "src/constants/routes";
 import { Input } from "../common/Input/Input";
-import { Icon, IconType } from "../common/Icon/Icon";
+import { REG_EX_EMAIL, REG_EX_PASSWORD } from "src/constants";
+import { login } from "src/redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
-type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  buttonText: string;
-  text: string;
-  link: string;
-  variantForm: "authorization" | "registration";
-  handleChangeVariant: (variantForm: "authorization" | "registration") => void;
-};
+const PREFIX = "RegistrationForm";
 
-const PREFIX = "AuthorizationModal";
-
-const StyledModalOverlay = styled("div", {
-  name: `${PREFIX}-StyledSection`,
+const StyledRegistForm = styled(Box, {
+  name: `${PREFIX}-StyledInputWrapper`,
 })(({ theme }) => ({
-  position: "fixed",
-  inset: 0,
-  backgroundColor: "rgba(0, 0, 0, 0.3)",
-  zIndex: 1000,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}));
+  width: "45%",
 
-const StyledModalContent = styled("div", {
-  name: `${PREFIX}-StyledSection`,
-})(({ theme }) => ({
-  width: 450,
-  height: 450,
-  backgroundColor: theme.palette.white.main,
-  padding: theme.spacing(5),
-  overflow: "auto",
-  display: "grid",
-  position: "relative",
-  outline: "none",
-  borderRadius: 35,
+  "@media (max-width: 1024px)": {
+    width: "80%",
+  },
 
-  "@media (max-width: 769px)": {
-    width: "100%",
-    height: "100%",
-    padding: theme.spacing(8, 2),
-    borderRadius: 0,
+  "@media (max-width: 600px)": {
+    width: "90%",
   },
 }));
 
 const StyledButton = styled(Button, {
   name: `${PREFIX}-StyledButton`,
 })(({ theme }) => ({
-  padding: theme.spacing(1, 8),
-  alignSelf: "center",
+  padding: theme.spacing(1.5, 10),
   transition: "all 0.3s",
+  color: theme.palette.white.main,
+  backgroundColor: theme.palette.green.main,
+  borderRadius: 0,
+  alignSelf: "flex-start",
+  border: `1px solid ${theme.palette.green.main}`,
+  fontFamily: "CormorantInfantBold",
+  marginTop: theme.spacing(2),
+
+  "&:hover": {
+    border: `1px solid ${theme.palette.green.main}`,
+    color: theme.palette.green.main,
+  },
+
+  "@media (max-width: 600px)": {
+    padding: theme.spacing(1, 5),
+    alignSelf: "center",
+  },
 }));
 
 const StyledBlock = styled(Box, {
@@ -67,6 +63,9 @@ const StyledBlock = styled(Box, {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "space-between",
+  background: theme.palette.white.main,
+  padding: theme.spacing(5),
+  borderRadius: 25,
 }));
 
 const StyledTitle = styled(Typography, {
@@ -74,45 +73,39 @@ const StyledTitle = styled(Typography, {
 })(({ theme }) => ({
   fontFamily: "MarckScript",
   fontSize: 50,
+  marginBottom: theme.spacing(2),
+
+  "@media (max-width: 600px)": {
+    fontSize: 30,
+  },
 }));
 
 const StyledInputsWrapper = styled(Grid, {
   name: `${PREFIX}-StyledInputsWrapper`,
 })(({ theme }) => ({
-  padding: theme.spacing(3, 2),
+  padding: theme.spacing(2),
   border: `1px solid ${theme.palette.secondary.light}`,
+  justifyContent: "space-between",
 }));
 
 const StyledInputWrapper = styled(Grid, {
   name: `${PREFIX}-StyledInputWrapper`,
 })(({ theme }) => ({
   width: "100%",
+
+  "&:not(:last-child)": {
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const StyledText = styled(Typography, {
   name: `${PREFIX}-StyledText`,
 })(({ theme }) => ({
   fontFamily: "CormorantInfantRegular",
-}));
+  padding: theme.spacing(3, 0),
 
-const StyledIcon = styled(Icon, {
-  name: `${PREFIX}-StyledIcon`,
-})(({ theme }) => ({
-  "& path": {
-    color: theme.palette.white.main,
-  },
-}));
-
-const StyledCloseButton = styled(Button, {
-  name: `${PREFIX}-StyledIcon`,
-})(({ theme }) => ({
-  display: "none",
-  position: "absolute",
-  top: 20,
-  right: 15,
-
-  "@media (max-width: 769px)": {
-    display: "block",
+  "@media (max-width: 600px)": {
+    fontSize: 12,
   },
 }));
 
@@ -121,29 +114,25 @@ export interface FormValueType {
   password: string;
 }
 
-export const REG_EX_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-export const REG_EX_PASSWORD =
-  /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 export interface ValidFormValueType {
   isEmailValid: boolean;
   isPasswordValid: boolean;
 }
 
-export const AuthorizationModal = ({
-  isOpen,
-  onClose,
-  title,
-  buttonText,
-  text,
-  link,
-  variantForm,
-  handleChangeVariant,
-}: ModalProps) => {
+export const AuthorizationForm = () => {
   const navigate = useNavigate();
 
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
+
+  const dispatch = useDispatch();
+  const { error } = useSelector((state: RootState) => state.user);
+
+  const handleClick = (e: FormEvent) => {
+    e.preventDefault();
+    login(dispatch, { email: formValue.email, password: formValue.password });
+  };
 
   const [formValue, setFormValue] = useState<FormValueType>({
     email: "",
@@ -180,59 +169,38 @@ export const AuthorizationModal = ({
   };
 
   useEffect(() => {
-    setValidForm({ isEmailValid, isPasswordValid });
+    setValidForm({
+      isEmailValid,
+      isPasswordValid,
+    });
   }, [isEmailValid, isPasswordValid]);
 
   return (
-    <Modal
-      preventScroll
-      shouldCloseOnEsc
-      isOpen={isOpen}
-      onAfterOpen={() => {
-        const { body } = window.document;
-        body.style.overflow = "hidden";
-      }}
-      onAfterClose={() => {
-        const { body } = window.document;
-        body.style.overflow = "auto";
-      }}
-      onRequestClose={onClose}
-      overlayElement={({ style, ...props }, children) => (
-        <StyledModalOverlay {...props}>{children}</StyledModalOverlay>
-      )}
-      contentElement={({ style, ...props }, children) => (
-        <StyledModalContent {...props}>{children}</StyledModalContent>
-      )}
-    >
+    <StyledRegistForm>
       <StyledBlock>
-        <StyledCloseButton onClick={onClose}>
-          <StyledIcon icon={IconType.CloseBtn} viewBox="0 0 24 24" />
-        </StyledCloseButton>
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle>Sign in</StyledTitle>
         <StyledInputsWrapper container>
-          <StyledInputWrapper item sx={{ mb: 2 }}>
-            <StyledText>Email</StyledText>
+          <StyledInputWrapper item>
             <Input
               rows={1}
-              paddingY={1.2}
+              paddingY={2}
               paddingX={2.5}
               placeholder="Email"
-              isMask={false}
-              multiline={false}
+              allowEmptyFormatting={false}
               variant="outlined"
-              helperText="Please enter corect email"
+              isMask={false}
+              helperText="Please enter correct email"
               handleChange={handleChangeEmail}
               value={formValue.email}
               onBlur={() => setEmailError(true)}
               error={emailError && !isValidForm.isEmailValid}
-              data-testid="userName"
+              multiline={false}
             />
           </StyledInputWrapper>
           <StyledInputWrapper item>
-            <StyledText>Password</StyledText>
             <Input
               rows={1}
-              paddingY={1.2}
+              paddingY={2}
               paddingX={2.5}
               placeholder="Password"
               allowEmptyFormatting={false}
@@ -248,6 +216,11 @@ export const AuthorizationModal = ({
             />
           </StyledInputWrapper>
         </StyledInputsWrapper>
+        {error && (
+          <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
+            Something went wrong...
+          </Alert>
+        )}
         <StyledButton
           disabled={
             isPasswordValid && isEmailValid
@@ -255,24 +228,23 @@ export const AuthorizationModal = ({
               : isDisabledButton
           }
           variant="outlined"
-          onClick={() => {
-            navigate(`${ROUTES.USERPAGE}`);
-            window.scrollTo(0, 0);
-            onClose();
-          }}
+          onClick={handleClick}
         >
-          {buttonText}
+          Login
         </StyledButton>
         <StyledText>
-          {`${text} `}
+          DO NOT REMEMBER THE PASSWORD?{` `}
           <Link
-            sx={{ cursor: "pointer" }}
-            onClick={() => handleChangeVariant(variantForm)}
+            sx={{ cursor: "pointer", fontWeight: 600 }}
+            onClick={() => {
+              navigate(`${ROUTES.REGISTER}`);
+              window.scrollTo(0, 0);
+            }}
           >
-            {link}
+            CREATE A NEW ACCOUNT
           </Link>
         </StyledText>
       </StyledBlock>
-    </Modal>
+    </StyledRegistForm>
   );
 };

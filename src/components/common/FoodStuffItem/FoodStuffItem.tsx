@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   Card,
   CardMedia,
@@ -8,8 +8,14 @@ import {
   Button,
   Fab,
   styled,
+  Box,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FoodStuffItemType } from "src/constants";
+import { useDispatch } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { addToCart } from "src/redux/cardRedux";
 
 const PREFIX = "FoodStuffItem";
 
@@ -51,31 +57,68 @@ const StyledDescription = styled(Typography, {
   color: theme.palette.secondary.main,
 }));
 
+const StyledButton = styled(Button, {
+  name: `${PREFIX}-StyledButton`,
+})(({ theme }) => ({
+  minWidth: 32,
+  height: 32,
+}));
+
 type FoodStuffItemProps = {
-  image: string;
-  title: string;
-  description: string;
-  price: string;
+  product: FoodStuffItemType;
 };
 
-export const FoodStuffItem: FC<FoodStuffItemProps> = ({
-  image,
-  title,
-  description,
-  price,
-}) => (
-  <StyledCard>
-    <StyledFub aria-label="like">
-      <FavoriteIcon />
-    </StyledFub>
-    <CardMedia component="img" height="300" image={image} alt={title} />
-    <CardContent sx={{ px: 3 }}>
-      <StyledTitle gutterBottom>{title}</StyledTitle>
-      <StyledDescription>{description}</StyledDescription>
-      <Typography>{price}</Typography>
-    </CardContent>
-    <CardActions sx={{ pb: 3, px: 3 }}>
-      <Button variant="outlined">Buy</Button>
-    </CardActions>
-  </StyledCard>
-);
+export const FoodStuffItem: FC<FoodStuffItemProps> = ({ product }) => {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantity = (type: string) => {
+    if (quantity > 1 && type === "dec") {
+      setQuantity(quantity - 1);
+    } else if (quantity > 0 && type === "inc") {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleClick = () =>
+    dispatch(
+      addToCart({
+        product: { ...product, quantity },
+        quantityItems: quantity,
+        price: product.price,
+      })
+    );
+
+  return (
+    <StyledCard>
+      <StyledFub aria-label="like">
+        <FavoriteIcon />
+      </StyledFub>
+      <CardMedia
+        component="img"
+        height="300"
+        image={product.img}
+        alt={product.title}
+      />
+      <CardContent sx={{ px: 3 }}>
+        <StyledTitle gutterBottom>{product.title}</StyledTitle>
+        <StyledDescription>{product.desc}</StyledDescription>
+        <Typography>{product.price} UAH</Typography>
+      </CardContent>
+      <CardActions sx={{ pb: 3, px: 3, justifyContent: "space-between" }}>
+        <Button variant="outlined" onClick={handleClick}>
+          Buy
+        </Button>
+        <Box sx={{ display: "flex" }}>
+          <StyledButton size="small" onClick={() => handleQuantity("inc")}>
+            <AddIcon />
+          </StyledButton>
+          <StyledTitle sx={{ px: 1, height: 32 }}>{quantity}</StyledTitle>
+          <StyledButton size="small" onClick={() => handleQuantity("dec")}>
+            <RemoveIcon />
+          </StyledButton>
+        </Box>
+      </CardActions>
+    </StyledCard>
+  );
+};

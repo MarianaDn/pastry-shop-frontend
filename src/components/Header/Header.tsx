@@ -1,17 +1,22 @@
 import {
+  Badge,
+  BadgeProps,
   Grid,
   List,
   ListItem,
   ListItemButton,
+  listItemButtonClasses,
   styled,
-  typographyClasses,
 } from "@mui/material";
 import { Icon, IconType } from "src/components/common/Icon/Icon";
 import { Menu } from "src/components/Menu/Menu";
 import { isDesktop } from "react-device-detect";
 import { useState } from "react";
 import { ModalMenu } from "../ModalMenu/ModalMenu";
-import { AuthorizationModal } from "../AuthorizationModal/AuthorizationModal";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "src/constants/routes";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 const PREFIX = "Header";
 
@@ -26,6 +31,7 @@ const StyledGrid = styled(Grid, {
   height: 85,
   background: theme.palette.white.main,
   zIndex: 10,
+  boxShadow: `0px 2px 10px ${theme.palette.secondary.contrastText}`,
 
   [theme.breakpoints.down("md")]: {
     padding: theme.spacing(0, 0.2),
@@ -49,22 +55,28 @@ const StyledList = styled(List, {
 })({
   display: "flex",
 
-  [`& .${typographyClasses.root}`]: {
+  [`& .${listItemButtonClasses.root}`]: {
     fontFamily: "MarckScript",
-    fontSize: 24,
+    fontSize: 20,
   },
 });
 
-export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const [isPopUpVariant, setIsPopUpVariant] = useState("authorization");
-  console.log(isPopUpOpen);
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+    backgroundColor: theme.palette.secondary.light,
+  },
+}));
 
+export const Header = () => {
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleMenuClose = () => setIsMenuOpen(false);
-  const handlePopUpClose = () => setIsPopUpOpen(false);
-  const handlePopUpVariant = (variant: "authorization" | "registration") =>
-    setIsPopUpVariant(variant);
+  const user = useSelector((state: RootState) => state.user.currentUser);
+  const quantity = useSelector((state: RootState) => state.cart.quantityItems);
 
   return (
     <StyledGrid container>
@@ -84,43 +96,40 @@ export const Header = () => {
       <Grid item>
         <StyledList>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => setIsPopUpOpen((x) => !x)}>
-              <StyledIcon icon={IconType.User} viewBox="0 0 32 32" />
+            <ListItemButton
+              onClick={() => {
+                user
+                  ? navigate(`${ROUTES.HOME}`)
+                  : navigate(`${ROUTES.REGISTER}`);
+                window.scrollTo(0, 0);
+              }}
+            >
+              Register
             </ListItemButton>
-            <ListItemButton>
-              <StyledIcon icon={IconType.Wishlist} viewBox="0 0 32 32" />
+            <ListItemButton
+              onClick={() => {
+                user
+                  ? navigate(`${ROUTES.HOME}`)
+                  : navigate(`${ROUTES.AUTHORIZATION}`);
+                window.scrollTo(0, 0);
+              }}
+            >
+              Sing in
             </ListItemButton>
-            <ListItemButton>
-              <StyledIcon icon={IconType.Basket} viewBox="0 0 32 32" />
+            <ListItemButton
+              onClick={() => {
+                navigate(`${ROUTES.SHOPPINGCARD}`);
+                window.scrollTo(0, 0);
+              }}
+            >
+              <StyledBadge badgeContent={quantity}>
+                <StyledIcon icon={IconType.Basket} viewBox="0 0 32 32" />
+              </StyledBadge>
             </ListItemButton>
           </ListItem>
         </StyledList>
       </Grid>
       <ModalMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
-      {console.log(isPopUpVariant)}
-      {isPopUpVariant === "authorization" ? (
-        <AuthorizationModal
-          isOpen={isPopUpOpen}
-          onClose={handlePopUpClose}
-          title="Authorization"
-          buttonText="Log in"
-          text="Not registered yet?"
-          link="Register"
-          variantForm="registration"
-          handleChangeVariant={handlePopUpVariant}
-        />
-      ) : (
-        <AuthorizationModal
-          isOpen={isPopUpOpen}
-          onClose={handlePopUpClose}
-          title="Registration"
-          buttonText="Sing up"
-          text="Do you have an account?"
-          link="Log in"
-          variantForm="authorization"
-          handleChangeVariant={handlePopUpVariant}
-        />
-      )}
     </StyledGrid>
   );
 };

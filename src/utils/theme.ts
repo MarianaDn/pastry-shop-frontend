@@ -60,7 +60,7 @@ export const theme = createTheme({
       main: '#2f80ed',
     },
     green: {
-      main: '#219653',
+      main: '#219F94',
       dark: '#6fcf97',
       light: '#c5ecd6',
     },
