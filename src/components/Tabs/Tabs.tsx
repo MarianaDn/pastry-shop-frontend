@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
+import { FoodStuffItem } from "../common/FoodStuffItem/FoodStuffItem";
 
 const PREFIX = "Tabs";
 
@@ -75,6 +76,11 @@ export const Tabs = () => {
   };
 
   const { products, total } = useSelector((state: RootState) => state.cart);
+  const { preferencesProducts } = useSelector(
+    (state: RootState) => state.select
+  );
+
+  console.log(preferencesProducts);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -92,22 +98,30 @@ export const Tabs = () => {
         </StyledTabs>
         <StyledTabPanel value="Shopping Bag">
           <StyledProductCardWrapper>
-            {products.map((product) => (
-              <Cart
-                key={product.title}
-                title={product.title}
-                desc={product.desc}
-                img={product.img}
-                price={product.price}
-                quantity={product.quantity}
-              />
-            ))}
+            {products.length > 0
+              ? products.map((product) => (
+                  <Cart
+                    key={product.title}
+                    title={product.title}
+                    desc={product.desc}
+                    img={product.img}
+                    price={product.price}
+                    quantity={product.quantity}
+                  />
+                ))
+              : "No items..."}
           </StyledProductCardWrapper>
           <StyledSummeryCardWrapper sx={{ width: "30%" }}>
             <SummaryCard total={total} />
           </StyledSummeryCardWrapper>
         </StyledTabPanel>
-        <TabPanel value="Your wishlist">Item Two</TabPanel>
+        <StyledTabPanel value="Your wishlist">
+          {preferencesProducts.length > 0
+            ? preferencesProducts.map((selectProduct) => (
+                <FoodStuffItem product={selectProduct} />
+              ))
+            : "No items..."}
+        </StyledTabPanel>
       </TabContext>
     </Box>
   );

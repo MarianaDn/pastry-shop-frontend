@@ -207,5 +207,5 @@ export interface productItems {
   desc: string;
   img: string;
   price: number;
-  quantity: number;
+  quantity?: number;
 }

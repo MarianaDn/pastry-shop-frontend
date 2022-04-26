@@ -1,12 +1,13 @@
 import { Box, Button, styled } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { userRequest } from "src/constants";
 import { ROUTES } from "src/constants/routes";
 import { RootState } from "src/redux/store";
 import Background from "src/assets/images/form_bg.jpg";
+import { cleanCart } from "src/redux/cardRedux";
 
 const PREFIX = "SuccessSection";
 
@@ -27,6 +28,7 @@ const StyledPageWrapper = styled(Box, {
 export const SuccessSection = () => {
   const navigate = useNavigate();
   const location: any = useLocation();
+  const dispatch = useDispatch();
 
   const data = location.state.stripeData;
   const cart = location.state.products;
@@ -49,6 +51,7 @@ export const SuccessSection = () => {
       } catch {}
     };
     data && createOrder();
+    dispatch(cleanCart());
   }, [cart, data, currentUser]);
 
   return (

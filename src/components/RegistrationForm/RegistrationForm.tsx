@@ -12,9 +12,6 @@ import {
 import { ROUTES } from "src/constants/routes";
 import { Input } from "../common/Input/Input";
 import { REG_EX_NAME, REG_EX_SURNAME, userRequest } from "src/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
-import { login } from "src/redux/apiCalls";
 
 const PREFIX = "RegistrationForm";
 

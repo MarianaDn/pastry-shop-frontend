@@ -2,6 +2,7 @@ import { productItems } from "src/constants";
 
 //action-types
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const CLEAN_CART = 'CLEAN_CART';
 
 interface AddToCartItems {
   product: productItems;
@@ -11,6 +12,7 @@ interface AddToCartItems {
 
 //actions
 export const addToCart = (payload: AddToCartItems) => ({ type: ADD_TO_CART, payload });
+export const cleanCart = () => ({ type: CLEAN_CART });
 
 type State = {
   products: productItems[];
@@ -25,12 +27,10 @@ const initialState: State = {
   total: 0,
 };
 
-type AddToCartAction = {
-  type: string;
-  payload: AddToCartItems;
-};
+type addToCart= { type: typeof ADD_TO_CART; payload: AddToCartItems};
+type cleanCart = { type: typeof CLEAN_CART;  };
 
-export const addToCartReducer = (state = initialState, action: AddToCartAction) => {
+export const addToCartReducer = (state = initialState, action: addToCart | cleanCart ) => {
   switch (action.type) {
     
     case ADD_TO_CART:
@@ -39,6 +39,13 @@ export const addToCartReducer = (state = initialState, action: AddToCartAction) 
         products: state.products.concat(action.payload.product),
         quantityItems: state.quantityItems += 1,
         total: state.total += action.payload.price * action.payload.quantityItems
+      };
+      case CLEAN_CART:
+      return {
+        ...state,
+        products: [],
+        quantityItems: 0,
+        total: 0,
       };
     default:
       return state;

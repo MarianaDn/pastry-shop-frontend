@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -7,9 +6,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { useState, FC } from "react";
+import { FC } from "react";
 import { productItems } from "src/constants";
 
 const PREFIX = "ShopCard";
@@ -48,46 +45,28 @@ const StyledDescription = styled(Typography, {
   color: theme.palette.secondary.main,
 }));
 
-const StyledButton = styled(Button, {
-  name: `${PREFIX}-StyledButton`,
-})(({ theme }) => ({
-  minWidth: 32,
-}));
-
 export const Cart: FC<productItems> = ({
   title,
   desc,
   img,
   price,
-  quantity,
-}) => {
-  const [quantityItems, setQuantity] = useState(quantity);
-
-  const handleQuantity = (type: string) => {
-    if (quantityItems > 1 && type === "dec") {
-      setQuantity(quantityItems - 1);
-    } else if (quantityItems > 0 && type === "inc") {
-      setQuantity(quantityItems + 1);
-    }
-  };
-
-  return (
-    <StyledCard sx={{ width: "100%" }}>
-      <CardMedia
-        component="img"
-        height="200"
-        image={img}
-        alt={title}
-        sx={{ width: 200 }}
-      />
-      <CardContent>
-        <StyledTitle gutterBottom>{title}</StyledTitle>
-        <StyledDescription>{desc}</StyledDescription>
-        <StyledTitle>{price * quantity} UAH</StyledTitle>
-      </CardContent>
-      <CardActions sx={{ width: 100, justifyContent: "center" }}>
-        <StyledTitle sx={{ px: 1 }}>{quantityItems} шт.</StyledTitle>
-      </CardActions>
-    </StyledCard>
-  );
-};
+  quantity = 1,
+}) => (
+  <StyledCard sx={{ width: "100%" }}>
+    <CardMedia
+      component="img"
+      height="200"
+      image={img}
+      alt={title}
+      sx={{ width: 200 }}
+    />
+    <CardContent>
+      <StyledTitle gutterBottom>{title}</StyledTitle>
+      <StyledDescription>{desc}</StyledDescription>
+      <StyledTitle>{price * quantity} UAH</StyledTitle>
+    </CardContent>
+    <CardActions sx={{ width: 150, justifyContent: "center" }}>
+      <StyledTitle sx={{ px: 1 }}>{quantity} шт.</StyledTitle>
+    </CardActions>
+  </StyledCard>
+);

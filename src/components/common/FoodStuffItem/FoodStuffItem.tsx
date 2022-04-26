@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { addToCart } from "src/redux/cardRedux";
+import { addToPreference } from "src/redux/selectedProductsReducer";
 
 const PREFIX = "FoodStuffItem";
 
@@ -89,9 +90,16 @@ export const FoodStuffItem: FC<FoodStuffItemProps> = ({ product }) => {
       })
     );
 
+  const handleSelect = () =>
+    dispatch(
+      addToPreference({
+        preferencesProduct: product,
+      })
+    );
+
   return (
     <StyledCard>
-      <StyledFub aria-label="like">
+      <StyledFub aria-label="like" onClick={handleSelect}>
         <FavoriteIcon />
       </StyledFub>
       <CardMedia
