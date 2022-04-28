@@ -7,7 +7,10 @@ import { ProductsCatalog } from "src/pages/ProductsCatalog/ProductsCatalog";
 import { Registration } from "src/pages/Registration/Registration";
 import { ShoppingCard } from "src/pages/ShoppingCard/ShoppingCard";
 import { Success } from "src/pages/Success/Success";
-import { UserPage } from "src/pages/UserPage/UserPage";
+import { AdminPage } from "src/pages/AdminPage/AdminPage";
+import { Products } from "src/pages/Products/Products";
+import { EditProductPage } from "src/pages/EditProductPage/EditProductPage";
+import { NewProduct } from "src/pages/NewProduct/NewProduct";
 
 interface Page {
   component: JSX.Element;
@@ -27,8 +30,8 @@ const pages: Page[] = [
     pathName: "CategoryPage",
   },
   {
-    component: <UserPage />,
-    path: ROUTES.USERPAGE,
+    component: <AdminPage />,
+    path: ROUTES.ADMINPAGE,
     pathName: "UserPage",
   },
   {
@@ -50,6 +53,21 @@ const pages: Page[] = [
     component: <Success />,
     path: ROUTES.SUCCESS,
     pathName: "Success",
+  },
+  {
+    component: <Products />,
+    path: ROUTES.PRODUCTS,
+    pathName: "Products",
+  },
+  {
+    component: <EditProductPage />,
+    path: ROUTES.EDITPRODUCT,
+    pathName: "EditProduct",
+  },
+  {
+    component: <NewProduct />,
+    path: ROUTES.NEWPRODUCT,
+    pathName: "NewProduct",
   },
   {
     component: <Page404 />,

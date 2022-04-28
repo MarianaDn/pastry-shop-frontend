@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import StripeChecout from "react-stripe-checkout";
 import { userRequest } from "src/constants";
+import { ROUTES } from "src/constants/routes";
 import { RootState } from "src/redux/store";
 
 const KEY =
@@ -55,6 +56,7 @@ type SummaryCardProp = {
 export const SummaryCard: FC<SummaryCardProp> = ({ total }) => {
   const cart = useSelector((state: RootState) => state.cart);
   const [stripeToken, setStripeToken] = useState<any>(null);
+  const user = useSelector((state: RootState) => state.user.currentUser);
   const onToken = (token: any) => setStripeToken(token);
 
   const navigate = useNavigate();
@@ -99,19 +101,29 @@ export const SummaryCard: FC<SummaryCardProp> = ({ total }) => {
         </StyledBox>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
-        <StripeChecout
-          name="Back and Bliss"
-          billingAddress
-          shippingAddress
-          description={`Your total is ${total} UAH`}
-          amount={total * 100}
-          token={onToken}
-          stripeKey={KEY}
-        >
-          <Button variant="contained" size="small">
-            CHECKOUT NOW
+        {!user ? (
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => navigate(ROUTES.AUTHORIZATION)}
+          >
+            Log in
           </Button>
-        </StripeChecout>
+        ) : (
+          <StripeChecout
+            name="Back and Bliss"
+            billingAddress
+            shippingAddress
+            description={`Your total is ${total} UAH`}
+            amount={total * 100}
+            token={onToken}
+            stripeKey={KEY}
+          >
+            <Button variant="contained" size="small">
+              CHECKOUT NOW
+            </Button>
+          </StripeChecout>
+        )}
       </CardActions>
     </Card>
   );

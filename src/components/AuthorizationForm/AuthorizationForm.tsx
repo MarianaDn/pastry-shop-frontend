@@ -132,7 +132,9 @@ export const AuthorizationForm = () => {
   const handleClick = (e: FormEvent) => {
     e.preventDefault();
     login(dispatch, { email: formValue.email, password: formValue.password });
-    navigate(ROUTES.HOME);
+    formValue.email === "admin@gmail.com"
+      ? navigate(ROUTES.ADMINPAGE)
+      : navigate(ROUTES.HOME);
   };
 
   const [formValue, setFormValue] = useState<FormValueType>({

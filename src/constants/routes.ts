@@ -8,5 +8,8 @@ export const ROUTES = {
     SHOPPINGCARD: '/shopping-card',
     MAKING_ORDER: '/making-order',
     PAYMENT: '/payment',
-    SUCCESS: '/success'
+    SUCCESS: '/success',
+    PRODUCTS: '/admin/products',
+    EDITPRODUCT: 'admin/products/:productId',
+    NEWPRODUCT: '/new-product'
 }

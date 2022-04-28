@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { productItems } from "src/constants";
 
 //action-types
