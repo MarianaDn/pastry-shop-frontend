@@ -57,7 +57,7 @@ const StyledText = styled(Typography, {
 }));
 
 export const FeaturedInfo = () => {
-  const [income, setIncome] = useState<incomeValue | any>([]);
+  const [income, setIncome] = useState<incomeValue[]>([]);
   const [perc, setPerc] = useState(0);
 
   useEffect(() => {

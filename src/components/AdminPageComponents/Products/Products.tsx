@@ -1,6 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "src/redux/apiCalls";
@@ -39,6 +39,14 @@ const StyledListEdit = styled("button", {
   marginRight: theme.spacing(3.5),
 }));
 
+type renderCellColumnProps = {
+  row: {
+    _id: string;
+    img: string;
+    title: string;
+  };
+};
+
 export const ProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -58,11 +66,12 @@ export const ProductList = () => {
       field: "product",
       headerName: "Product",
       width: 200,
-      renderCell: (params: any) => {
+      renderCell: ({ row: { img, title } }: renderCellColumnProps) => {
+        console.log(title);
         return (
           <StyledListItem>
-            <StyledListImg src={params.row.img} alt="" />
-            <Typography sx={{ fontSize: 8 }}>{params.row.title}</Typography>
+            <StyledListImg src={img} alt="" />
+            <Typography sx={{ fontSize: 8 }}>{title}</Typography>
           </StyledListItem>
         );
       },
@@ -82,18 +91,18 @@ export const ProductList = () => {
       field: "action",
       headerName: "Action",
       width: 150,
-      renderCell: (params: any) => {
+      renderCell: ({ row: { _id } }: renderCellColumnProps) => {
         return (
           <>
             <StyledListEdit
-              onClick={() => navigate(`${ROUTES.PRODUCTS}/${params.row._id}`)}
+              onClick={() => navigate(`${ROUTES.PRODUCTS}/${_id}`)}
             >
               Edit
             </StyledListEdit>
             <DeleteOutline
               color="error"
               sx={{ cursor: "pointer" }}
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(_id)}
             />
           </>
         );

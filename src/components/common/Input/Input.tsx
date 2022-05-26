@@ -1,4 +1,4 @@
-import { FC, FocusEvent } from "react";
+import { ChangeEvent, FC, FocusEvent } from "react";
 import {
   Grid,
   InputAdornment,
@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { SxProps } from "@mui/system";
 import { Icon, IconType } from "src/components/common/Icon/Icon";
-import NumberFormat from "react-number-format";
 
 export interface InputProps {
   variant?: "outlined" | "standard";
@@ -24,7 +23,7 @@ export interface InputProps {
   paddingY: number;
   paddingX: number;
   testIdIcon?: string;
-  handleChange?: (value: any) => void;
+  handleChange?: (value: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   error?: boolean;
   helperText?: string;
