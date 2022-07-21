@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
-import { Authorization } from "src/pages/Authorization/Authorization";
-import { HomePage } from "src/pages/HomePage/HomePage";
-import { Page404 } from "src/pages/Page404/Page404";
-import { ProductsCatalog } from "src/pages/ProductsCatalog/ProductsCatalog";
-import { Registration } from "src/pages/Registration/Registration";
-import { ShoppingCard } from "src/pages/ShoppingCard/ShoppingCard";
-import { Success } from "src/pages/Success/Success";
-import { AdminPage } from "src/pages/AdminPage/AdminPage";
-import { Products } from "src/pages/Products/Products";
-import { EditProductPage } from "src/pages/EditProductPage/EditProductPage";
-import { NewProduct } from "src/pages/NewProduct/NewProduct";
+import { Authorization } from "src/pages/Authorization";
+import { HomePage } from "src/pages/HomePage";
+import { Page404 } from "src/pages/Page404";
+import { ProductsCatalog } from "src/pages/ProductsCatalog";
+import { Registration } from "src/pages/Registration";
+import { ShoppingCard } from "src/pages/ShoppingCard";
+import { Success } from "src/pages/Success";
+import { AdminPage } from "src/pages/AdminPage";
+import { Products } from "src/pages/Products";
+import { EditProductPage } from "src/pages/EditProductPage";
+import { NewProduct } from "src/pages/NewProduct";
 
 interface Page {
   component: JSX.Element;

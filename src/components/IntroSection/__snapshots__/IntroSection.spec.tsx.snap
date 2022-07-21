@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Footer /> should render footer snapshot 1`] = `
-<div
-  class="MuiGrid-root css-ep6pcx-MuiGrid-root-Intro-StyledGrid-root"
-  data-testid="introSection"
-/>
-`;

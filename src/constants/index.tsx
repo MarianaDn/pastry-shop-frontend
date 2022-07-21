@@ -1,4 +1,4 @@
-import { IconType } from "src/components/common/Icon/Icon";
+import { IconType } from "src/components/common/Icon";
 import Visa from "src/assets/images/visa.png";
 import MasterCard from "src/assets/images/mastercard.png";
 import GooglePay from "src/assets/images/googlePay.png";
@@ -188,7 +188,7 @@ export const REG_EX_PASSWORD =
 
 export const BASE_URL = "http://localhost:3001/api/";
 export const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODdiZmUzYTFkYWZjODU3NDk4NzcxZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MzA2NDE4MSwiZXhwIjoxNjUzMzIzMzgxfQ.KyolPAdjrU7TI2PFrxiKVQLlG5mG4ysm5lXQmI5WHqQ";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODdiZmUzYTFkYWZjODU3NDk4NzcxZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NDM3ODA5MSwiZXhwIjoxNjU0NjM3MjkxfQ.g9HrBmCi4tfE2DCdk-8RKBOCYkdDeEi9rrVOn9QlYKQ";
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
