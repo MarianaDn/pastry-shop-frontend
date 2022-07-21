@@ -6,14 +6,14 @@ const PREFIX = "RegistrationPage";
 
 const StyledPageWrapper = styled(Grid, {
   name: `${PREFIX}-StyledPageWrapper`,
-})(({ theme }) => ({
+})({
   background: `url(${Background}) center no-repeat`,
   backgroundSize: "cover",
   height: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-}));
+});
 
 export const Authorization = () => (
   <StyledPageWrapper>

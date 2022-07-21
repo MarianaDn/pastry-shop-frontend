@@ -1,3 +1,5 @@
+import { CurrentUser } from "src/constants";
+
 //action-types
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -7,13 +9,13 @@ export const LOG_OUT = 'LOG_OUT';
 
 //actions
 export const loginStart = () => ({ type: LOGIN_START});
-export const loginSuccess = (payload: any) => ({ type: LOGIN_SUCCESS, payload });
+export const loginSuccess = (payload: CurrentUser) => ({ type: LOGIN_SUCCESS, payload });
 export const loginFailure = () => ({ type: LOGIN_FAILURE });
 export const logOut = () => ({ type: LOG_OUT });
 
 
 type State = {
-  currentUser: null;
+  currentUser: any;
   isFetching: boolean,
   error: boolean;
 };
@@ -27,7 +29,7 @@ const initialState: State = {
 
 
 type loginStart = { type: typeof LOGIN_START; };
-type loginSuccess = { type: typeof LOGIN_SUCCESS; payload: any };
+type loginSuccess = { type: typeof LOGIN_SUCCESS; payload: CurrentUser };
 type loginFailure = { type: typeof LOGIN_FAILURE; };
 type logOut = { type: typeof LOG_OUT; };
 

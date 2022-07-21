@@ -1,15 +1,15 @@
-import { Button, Grid, styled } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { useDispatch } from "react-redux";
+import { Button, Grid, styled } from "@mui/material";
 import { app } from "src/firebase";
 import { addProduct } from "src/redux/apiCalls";
-import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
 
 const PREFIX = "NewProductSection";

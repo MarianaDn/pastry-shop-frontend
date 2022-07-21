@@ -1,5 +1,5 @@
-import { Grid, Typography, Divider, styled } from "@mui/material";
 import { Fragment } from "react";
+import { Grid, Typography, Divider, styled } from "@mui/material";
 import { Icon } from "src/components/common/Icon";
 import { benefitsData } from "src/constants";
 

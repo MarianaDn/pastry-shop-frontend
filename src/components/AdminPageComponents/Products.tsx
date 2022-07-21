@@ -1,21 +1,21 @@
-import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+import { styled, Typography } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
 import { deleteProduct, getProducts } from "src/redux/apiCalls";
 import { RootState } from "src/redux/store";
-import { styled, Typography } from "@mui/material";
 import { ROUTES } from "src/constants/routes";
 
 const PREFIX = "ProductList";
 
 const StyledListItem = styled("div", {
   name: `${PREFIX}-StyledListItem`,
-})(({ theme }) => ({
+})({
   display: "flex",
   alignItems: "center",
-}));
+});
 
 const StyledListImg = styled("img", {
   name: `${PREFIX}-StyledListImg`,
@@ -67,7 +67,6 @@ export const ProductList = () => {
       headerName: "Product",
       width: 200,
       renderCell: ({ row: { img, title } }: renderCellColumnProps) => {
-        console.log(title);
         return (
           <StyledListItem>
             <StyledListImg src={img} alt="" />

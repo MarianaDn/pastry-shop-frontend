@@ -1,3 +1,4 @@
+import { FC } from "react";
 import {
   Card,
   CardActions,
@@ -6,8 +7,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
-import { productItems } from "src/constants";
+import { ProductItems } from "src/constants";
 
 const PREFIX = "ShopCard";
 
@@ -45,7 +45,7 @@ const StyledDescription = styled(Typography, {
   color: theme.palette.secondary.main,
 }));
 
-export const Cart: FC<productItems> = ({
+export const Cart: FC<ProductItems> = ({
   title,
   desc,
   img,

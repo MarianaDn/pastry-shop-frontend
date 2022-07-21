@@ -1,10 +1,10 @@
-import { Button, Grid, styled, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import { FoodStuffItem } from "./common/FoodStuffItem";
-import Background from "src/assets/images/goods_bg.png";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { Button, Grid, styled, Typography } from "@mui/material";
+import Background from "src/assets/images/goods_bg.png";
 import { BASE_URL } from "src/constants";
+import { FoodStuffItem } from "./common/FoodStuffItem";
 
 const PREFIX = "CategorySection";
 
@@ -38,11 +38,11 @@ const StyledTitle = styled(Typography, {
 
 const StyledItems = styled(Grid, {
   name: `${PREFIX}-StyledItems`,
-})(({ theme }) => ({
+})({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-around",
-}));
+});
 
 const StyledButton = styled(Button, {
   name: `${PREFIX}-StyledButton`,

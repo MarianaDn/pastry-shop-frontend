@@ -12,17 +12,17 @@ import Cookie from "src/assets/images/about-image-2.png";
 import axios from "axios";
 
 interface headerDataProps {
-  nav: Array<navType>;
-  icons: Array<iconsType>;
+  nav: Array<NavType>;
+  icons: Array<IconsType>;
 }
 
-interface navType {
+interface NavType {
   id: number;
   name: string;
   category: string;
 }
 
-interface iconsType {
+interface IconsType {
   id: number;
   icon: IconType;
 }
@@ -69,24 +69,24 @@ export const benefitsData: IBenefitsData[] = [
   },
 ];
 
-interface paymentData {
+interface PaymentData {
   src: string;
   alt: string;
 }
 
-export const payment: Array<paymentData> = [
+export const payment: Array<PaymentData> = [
   { src: Visa, alt: "visa" },
   { src: MasterCard, alt: "mastercard" },
   { src: GooglePay, alt: "google pay" },
 ];
 
-interface socialMediaProp {
+interface SocialMediaProp {
   id: number;
   icon: IconType;
   link: string;
 }
 
-export const socialMedia: socialMediaProp[] = [
+export const socialMedia: SocialMediaProp[] = [
   {
     id: 1,
     icon: IconType.Facebook,
@@ -148,14 +148,14 @@ export const productData: ProductsData[] = [
   },
 ];
 
-type aboutItem = {
+type AboutItem = {
   image: string;
   alt: string;
   title: string;
   text: string;
 };
 
-export const aboutContent: aboutItem[] = [
+export const aboutContent: AboutItem[] = [
   {
     image: Croissants,
     alt: "croissants",
@@ -188,7 +188,7 @@ export const REG_EX_PASSWORD =
 
 export const BASE_URL = "http://localhost:3001/api/";
 export const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODdiZmUzYTFkYWZjODU3NDk4NzcxZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NDM3ODA5MSwiZXhwIjoxNjU0NjM3MjkxfQ.g9HrBmCi4tfE2DCdk-8RKBOCYkdDeEi9rrVOn9QlYKQ";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODdiZmUzYTFkYWZjODU3NDk4NzcxZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1ODQzNDY2MCwiZXhwIjoxNjU4NjkzODYwfQ.Zn9xlVlN3R7Y8EDZA2or2GAE396iCw-iyXYZbCAWnfw";
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
@@ -202,10 +202,42 @@ export type FoodStuffItemType = {
   price: number;
 };
 
-export interface productItems {
+export interface ProductItems {
   title: string;
   desc: string;
   img: string;
   price: number;
   quantity?: number;
 }
+
+export interface CurrentUser {
+  _id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  accessToken: string;
+}
+
+export interface ProductData {
+  _id: string;
+  title: string;
+  desc: string;
+  img: string;
+  categories: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export type FileType = {
+  lastModified: number;
+  lastModifiedDate: any;
+  name: string;
+  size: number;
+  type: string;
+  webkitRelativePath: string;
+};

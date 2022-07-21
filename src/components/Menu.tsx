@@ -6,9 +6,9 @@ import {
   styled,
   typographyClasses,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { headerData } from "src/constants";
 import { ROUTES } from "src/constants/routes";
-import { useNavigate } from "react-router-dom";
 
 const PREFIX = "Menu";
 

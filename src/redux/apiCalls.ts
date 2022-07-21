@@ -1,5 +1,5 @@
-import axios from "axios";
 import { Dispatch } from "react";
+import axios from "axios";
 import { BASE_URL, userRequest } from "src/constants";
 import { addProductFailure, addProductStart, addProductSuccess, deleteProductFailure, deleteProductStart, deleteProductSuccess, getProductFailure, getProductStart, getProductSuccess, updateProductFailure, updateProductStart, updateProductSuccess } from "./productRedux";
 import { loginFailure, loginStart, loginSuccess } from "./userRedux"
@@ -42,7 +42,6 @@ export const deleteProduct = async (id: string, dispatch: Dispatch<unknown>) => 
 export const updateProduct = async (id: string, product: any, dispatch: Dispatch<unknown>) => {
   dispatch(updateProductStart());
   try {
-    // update
     dispatch(updateProductSuccess({ id, product }));
   } catch (err) {
     dispatch(updateProductFailure());

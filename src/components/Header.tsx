@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { isDesktop } from "react-device-detect";
 import {
   Badge,
   BadgeProps,
@@ -8,15 +12,11 @@ import {
   listItemButtonClasses,
   styled,
 } from "@mui/material";
+import { RootState } from "src/redux/store";
 import { Icon, IconType } from "src/components/common/Icon";
 import { Menu } from "src/components/Menu";
-import { isDesktop } from "react-device-detect";
-import { useState } from "react";
-import { ModalMenu } from "./ModalMenu";
-import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
+import { ModalMenu } from "./ModalMenu";
 
 const PREFIX = "Header";
 

@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { Grid, Typography, Box, styled } from "@mui/material";
-import { useEffect, useState } from "react";
 import { userRequest } from "src/constants";
 
 type incomeValue = {
@@ -36,16 +36,16 @@ const StyledTitle = styled(Typography, {
 
 const StyledRangeWrapper = styled(Box, {
   name: `${PREFIX}-StyledRangeWrapper`,
-})(({ theme }) => ({
+})({
   display: "flex",
-}));
+});
 
 const StyledPerc = styled(Typography, {
   name: `${PREFIX}-StyledPerc`,
-})(({ theme }) => ({
+})({
   fontSize: 20,
   fontFamily: "CormorantInfantSemiBold",
-}));
+});
 
 const StyledText = styled(Typography, {
   name: `${PREFIX}-StyledTitle`,

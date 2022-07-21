@@ -1,10 +1,10 @@
-import { productItems } from "src/constants";
+import { ProductItems } from "src/constants";
 
 //action-types
 export const ADD_TO_PREFERENCE = "ADD_TO_PREFERENCE";
 
 interface AddToCartItems {
-  preferencesProduct: productItems;
+  preferencesProduct: ProductItems;
 }
 
 //actions
@@ -14,7 +14,7 @@ export const addToPreference = (payload: AddToCartItems) => ({
 });
 
 type State = {
-  preferencesProducts: productItems[];
+  preferencesProducts: ProductItems[];
 };
 
 //reducer

@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Alert,
   Box,
@@ -12,7 +13,6 @@ import {
 import { ROUTES } from "src/constants/routes";
 import { REG_EX_EMAIL, REG_EX_PASSWORD } from "src/constants";
 import { login } from "src/redux/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { Input } from "./common/Input";
 
@@ -20,7 +20,7 @@ const PREFIX = "RegistrationForm";
 
 const StyledRegistForm = styled(Box, {
   name: `${PREFIX}-StyledInputWrapper`,
-})(({ theme }) => ({
+})({
   width: "45%",
 
   "@media (max-width: 1024px)": {
@@ -30,7 +30,7 @@ const StyledRegistForm = styled(Box, {
   "@media (max-width: 600px)": {
     width: "90%",
   },
-}));
+});
 
 const StyledButton = styled(Button, {
   name: `${PREFIX}-StyledButton`,

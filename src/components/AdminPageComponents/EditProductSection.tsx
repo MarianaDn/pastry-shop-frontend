@@ -1,12 +1,12 @@
-import { useLocation } from "react-router-dom";
-import { Publish } from "@mui/icons-material";
-import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button, Grid, Typography, Box, styled } from "@mui/material";
+import { Publish } from "@mui/icons-material";
 import { RootState } from "src/redux/store";
 import { userRequest } from "src/constants";
 import { Chart } from "src/components/AdminPageComponents/Chart";
-import { Button, Grid, Typography, Box, styled } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
 
 const PREFIX = "EditProductSection";
@@ -22,9 +22,9 @@ const StyledTitleWrapper = styled(Grid, {
 
 const StyledSectionWrapper = styled(Grid, {
   name: `${PREFIX}-StyledInfoWrapper`,
-})(({ theme }) => ({
+})({
   flexDirection: "column",
-}));
+});
 
 const StyledInfoWrapper = styled(Grid, {
   name: `${PREFIX}-StyledInfoWrapper`,
@@ -106,9 +106,9 @@ const StyledImg = styled("img", {
 
 const StyledDataWrapper = styled(Box, {
   name: `${PREFIX}-StyledDataWrapper`,
-})(({ theme }) => ({
+})({
   display: "flex",
-}));
+});
 
 const StyledDataProp = styled(Typography, {
   name: `${PREFIX}-StyledDataProp`,

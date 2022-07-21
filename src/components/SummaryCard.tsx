@@ -1,3 +1,7 @@
+import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import StripeChecout from "react-stripe-checkout";
 import {
   Box,
   Button,
@@ -7,10 +11,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import StripeChecout from "react-stripe-checkout";
 import { userRequest } from "src/constants";
 import { ROUTES } from "src/constants/routes";
 import { RootState } from "src/redux/store";

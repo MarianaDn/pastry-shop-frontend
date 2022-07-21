@@ -1,8 +1,8 @@
 import { Box, Grid, Divider, styled, Typography } from "@mui/material";
-import LogoGif from "src/assets/images/logoGif.gif";
 import { payment } from "src/constants";
 import { Menu } from "src/components/Menu";
 import { SocialMedia } from "src/components/common/SocialMedia";
+import LogoGif from "src/assets/images/logoGif.gif";
 
 const PREFIX = "Footer";
 

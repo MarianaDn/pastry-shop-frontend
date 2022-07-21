@@ -1,7 +1,7 @@
-import { Grid, styled, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { userRequest } from "src/constants";
 import { format } from "timeago.js";
+import { Grid, styled, Typography } from "@mui/material";
+import { userRequest } from "src/constants";
 
 interface Orders {
   _id: string;
@@ -36,30 +36,30 @@ const StyledTitle = styled(Typography, {
 
 const StyledTable = styled("table", {
   name: `${PREFIX}-StyledTable`,
-})(({ theme }) => ({
+})({
   width: "100%",
   borderSpacing: 20,
-}));
+});
 
 const StyledTh = styled("th", {
   name: `${PREFIX}-StyledTable`,
-})(({ theme }) => ({
+})({
   textAlign: "left",
-}));
+});
 
 const StyledUser = styled("td", {
   name: `${PREFIX}-StyledTable`,
-})(({ theme }) => ({
+})({
   display: "flex",
   alignItems: "center",
   fontFamily: "CormorantInfantSemiBold",
-}));
+});
 
 const StyledDate = styled("td", {
   name: `${PREFIX}-StyledTable`,
-})(({ theme }) => ({
+})({
   fontFamily: "CormorantInfantLight",
-}));
+});
 
 const StyledButton = styled("button", {
   name: `${PREFIX}-StyledButton`,

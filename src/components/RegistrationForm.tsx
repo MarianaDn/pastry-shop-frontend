@@ -10,14 +10,14 @@ import {
   Typography,
 } from "@mui/material";
 import { ROUTES } from "src/constants/routes";
-import { Input } from "./common/Input";
 import { REG_EX_NAME, REG_EX_SURNAME, userRequest } from "src/constants";
+import { Input } from "./common/Input";
 
 const PREFIX = "RegistrationForm";
 
 const StyledRegistForm = styled(Box, {
   name: `${PREFIX}-StyledInputWrapper`,
-})(({ theme }) => ({
+})({
   width: "50%",
 
   "@media (max-width: 1024px)": {
@@ -27,7 +27,7 @@ const StyledRegistForm = styled(Box, {
   "@media (max-width: 600px)": {
     width: "90%",
   },
-}));
+});
 
 const StyledButton = styled(Button, {
   name: `${PREFIX}-StyledButton`,

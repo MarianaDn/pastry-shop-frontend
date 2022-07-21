@@ -22,7 +22,6 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/constants/routes";
 
@@ -38,11 +37,11 @@ const StyledTitle = styled(Typography, {
 
 const StyledText = styled(ListItemText, {
   name: `${PREFIX}-StyledText`,
-})(({ theme }) => ({
+})({
   span: {
     fontFamily: "CormorantInfantRegular",
   },
-}));
+});
 
 export const Sidebar = () => {
   const navigate = useNavigate();

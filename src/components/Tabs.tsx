@@ -1,14 +1,14 @@
 import { SyntheticEvent, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, styled, Tab } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { RootState } from "src/redux/store";
+import { ROUTES } from "src/constants/routes";
 import { Cart } from "./common/Card";
 import { SummaryCard } from "./SummaryCard";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "src/constants/routes";
 import { FoodStuffItem } from "./common/FoodStuffItem";
 
 const PREFIX = "Tabs";
@@ -79,8 +79,6 @@ export const Tabs = () => {
   const { preferencesProducts } = useSelector(
     (state: RootState) => state.select
   );
-
-  console.log(preferencesProducts);
 
   return (
     <Box sx={{ width: "100%" }}>

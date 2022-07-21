@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Visibility } from "@mui/icons-material";
 import {
   Grid,
@@ -7,7 +8,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 import { userRequest } from "src/constants";
 
 interface Users {

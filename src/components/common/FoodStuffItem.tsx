@@ -10,11 +10,11 @@ import {
   styled,
   Box,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { FoodStuffItemType } from "src/constants";
 import { useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FoodStuffItemType } from "src/constants";
 import { addToCart } from "src/redux/cardRedux";
 import { addToPreference } from "src/redux/selectedProductsReducer";
 
@@ -22,13 +22,13 @@ const PREFIX = "FoodStuffItem";
 
 const StyledFub = styled(Fab, {
   name: `${PREFIX}-StyledTitle`,
-})(({ theme }) => ({
+})({
   position: "absolute",
   top: 20,
   right: 20,
   width: 40,
   height: 40,
-}));
+});
 
 const StyledCard = styled(Card, {
   name: `${PREFIX}-StyledCard`,
@@ -60,10 +60,10 @@ const StyledDescription = styled(Typography, {
 
 const StyledButton = styled(Button, {
   name: `${PREFIX}-StyledButton`,
-})(({ theme }) => ({
+})({
   minWidth: 32,
   height: 32,
-}));
+});
 
 type FoodStuffItemProps = {
   product: FoodStuffItemType;

@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
+
+import { ProductData } from "src/constants";
+
 //action-types
 export const GET_PRODUCT_START = 'GET_PRODUCT_START';
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
@@ -31,7 +34,7 @@ export const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 
 
 type State = {
-  products: Array<any>;
+  products: ProductData[];
   isFetching: boolean,
   error: boolean;
 };
@@ -134,7 +137,6 @@ export const productReducer = (state = initialState, action: actionType) => {
         error: false,
       };
       case ADD_PRODUCT_SUCCESS:
-        console.log(action.payload)
       return {
         ...state,
         isFetching: true,

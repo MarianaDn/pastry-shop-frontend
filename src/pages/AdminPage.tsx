@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
+import { Box } from "@mui/material";
 import { Chart } from "src/components/AdminPageComponents/Chart";
 import { FeaturedInfo } from "src/components/AdminPageComponents/FeaturedInfo";
 import { Layout } from "src/components/AdminPageComponents/Layout";

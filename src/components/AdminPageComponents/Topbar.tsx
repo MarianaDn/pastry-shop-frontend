@@ -1,6 +1,6 @@
-import { Button, Grid, Typography, styled } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Button, Grid, Typography, styled } from "@mui/material";
 import { ROUTES } from "src/constants/routes";
 import { logOut } from "src/redux/userRedux";
 

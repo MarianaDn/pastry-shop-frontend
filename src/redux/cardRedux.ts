@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-import { productItems } from "src/constants";
+import { ProductItems } from "src/constants";
 
 //action-types
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const CLEAN_CART = 'CLEAN_CART';
 
 interface AddToCartItems {
-  product: productItems;
+  product: ProductItems;
   quantityItems: number;
   price: number;
 }
@@ -16,7 +16,7 @@ export const addToCart = (payload: AddToCartItems) => ({ type: ADD_TO_CART, payl
 export const cleanCart = () => ({ type: CLEAN_CART });
 
 type State = {
-  products: productItems[];
+  products: ProductItems[];
   quantityItems: number;
   total: number;
 };

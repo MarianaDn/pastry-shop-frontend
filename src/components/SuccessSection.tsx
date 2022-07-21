@@ -1,13 +1,13 @@
-import { Box, Button, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { Box, Button, styled } from "@mui/material";
 import { userRequest } from "src/constants";
 import { ROUTES } from "src/constants/routes";
 import { RootState } from "src/redux/store";
-import Background from "src/assets/images/form_bg.jpg";
 import { cleanCart } from "src/redux/cardRedux";
+import Background from "src/assets/images/form_bg.jpg";
 
 const PREFIX = "SuccessSection";
 
@@ -40,10 +40,12 @@ export const SuccessSection = () => {
       try {
         const res = await userRequest.post("/orders", {
           userId: currentUser._id,
-          products: cart.products.map((item: { _id: any; quantity: any }) => ({
-            productId: item._id,
-            quantity: item.quantity,
-          })),
+          products: cart.products.map(
+            (item: { _id: string; quantity: number }) => ({
+              productId: item._id,
+              quantity: item.quantity,
+            })
+          ),
           amount: cart.total,
           address: data.billing_details.address,
         });
